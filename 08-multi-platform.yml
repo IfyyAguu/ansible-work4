@@ -1,0 +1,46 @@
+---
+- name: Install Http servers
+  hosts: g1
+  become: yes
+
+  tasks:
+  #install httpd when it isa yum service but only when it is amazon
+  - name: Install HTTPD 
+    dnf:
+      name: httpd
+      state: present
+    when: ansible_distribution == "Amazon"
+
+  - name: Start Httpd
+    service:
+      name: httpd
+      state: started
+    when: ansible_distribution == "Amazon"
+
+  - name: Enable Httpd
+    service:
+      name: httpd
+      enabled: yes
+    when: ansible_distribution == "Amazon"
+  
+  
+  #install httpd when it isa yum service but only when it is ubuntu
+  - name: Install Apache2 
+    apt:
+      name: apache2
+      state: present
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Start Apache2
+    service:
+      name: apache2
+      state: started
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Enable Apache2
+    service:
+      name: apache2
+      enabled: yes
+    when: ansible_distribution == "Ubuntu"
+
+...

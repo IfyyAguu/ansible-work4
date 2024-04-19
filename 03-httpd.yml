@@ -1,11 +1,11 @@
 ---
 - name: Install Http servers
-  hosts: g1
+  hosts: n5
   become: yes
 
   tasks:
   - name: Install HTTPD 
-    yum:
+    apt:
       name: httpd
       state: present
 
