@@ -25,6 +25,9 @@
   
   
   #install httpd when it isa yum service but only when it is ubuntu
+  - name: Update apt cache
+    apt:
+      update_cache: yes
   - name: Install Apache2 
     apt:
       name: apache2
